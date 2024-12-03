@@ -12,7 +12,8 @@ class MhsController extends Controller
      */
     public function index()
     {
-        //
+        $mahasiswa = Mahasiswa::all();
+        return view('mahasiswa.index', compact('mahasiswa'));
     }
 
     /**
@@ -20,12 +21,12 @@ class MhsController extends Controller
      */
     public function create()
     {
-        
-        
-            return view('mahasiswa.create');
-        
-        
-        
+
+
+        return view('mahasiswa.create');
+
+
+
     }
 
     /**
@@ -38,13 +39,13 @@ class MhsController extends Controller
             'npm' => 'required|string|max:15',
             'prodi' => 'required|string|max:100',
         ]);
-    
+
         // Simpan data ke database
         Mahasiswa::create($validated);
-    
+
         return redirect()->route('mahasiswa.create')->with('success', 'Data mahasiswa berhasil disimpan!');
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -74,7 +75,15 @@ class MhsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Mencari mahasiswa berdasarkan ID, jika tidak ditemukan, akan menghasilkan error 404
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        // Menghapus data mahasiswa
+        $mahasiswa->delete();
+
+        // Mengarahkan kembali ke halaman sebelumnya dengan pesan sukses
+        return redirect()->back()->with('success', 'Mahasiswa berhasil dihapus!');
     }
+
 
 }
