@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\mahasiswa;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MhsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +17,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+    Route::get('/mahasiswa/create', [MhsController::class, 'create'])->name('mahasiswa.create');
+    Route::post('/mahasiswa/store', [MhsController::class, 'store'])->name('mahasiswa.store');
+
+        
+    });
+
 
 require __DIR__.'/auth.php';
