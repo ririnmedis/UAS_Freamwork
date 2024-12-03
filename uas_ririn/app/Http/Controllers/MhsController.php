@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MahasiswaExport;
 use App\Models\mahasiswa;
+use App\Exports\MhsExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
+
 
 class MhsController extends Controller
 {
@@ -83,6 +88,10 @@ class MhsController extends Controller
 
         // Mengarahkan kembali ke halaman sebelumnya dengan pesan sukses
         return redirect()->back()->with('success', 'Mahasiswa berhasil dihapus!');
+    }
+
+    public function exportExcel(){
+        return Excel::download(new MahasiswaExport, 'Mhs.xlsx');
     }
 
 

@@ -7,12 +7,13 @@
 
     <div class="container p-4 mx-auto">
         <div class="overflow-x-auto">
-            <a href="{{ route('mahasiswa.index') }}">
-                <button
-                    class="px-6 py-4 text-white bg-green-500 border border-green-500 rounded-lg shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    Tambah Data Mahasiswa
-                </button>
-            </a>
+    
+            <a href="{{ route('mahasiswa.export.excel') }}">
+                        <button
+                            class="px-6 py-4 text-white bg-green-500 border border-green-500 rounded-lg shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            Export to Excel
+                        </button>
+                    </a>
             <table class="min-w-full border border-collapse border-gray-200 mt-4">
                 <thead>
                     <tr class="bg-gray-100">

@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/mahasiswa', [MhsController::class, 'index'])->name('mahasiswa.index');
     // Route::get('mahasiswa/edit/{id}', [MhsController::class, 'edit'])->name('mahasiswa.edit');
     Route::delete('mahasiswa/{id}', [MhsController::class, 'destroy'])->name('mahasiswa.destroy');
+    Route::get('mahasiswa/export', [MhsController::class, 'exportExcel'])->name('mahasiswa.export.excel');
 
 
 
