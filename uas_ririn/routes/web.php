@@ -20,14 +20,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/mahasiswa/create', [MhsController::class, 'create'])->name('mahasiswa.create');
     Route::post('/mahasiswa/store', [MhsController::class, 'store'])->name('mahasiswa.store');
     Route::get('/mahasiswa', [MhsController::class, 'index'])->name('mahasiswa.index');
-    // Route::get('mahasiswa/edit/{id}', [MhsController::class, 'edit'])->name('mahasiswa.edit');
     Route::delete('mahasiswa/{id}', [MhsController::class, 'destroy'])->name('mahasiswa.destroy');
     Route::get('mahasiswa/export', [MhsController::class, 'exportExcel'])->name('mahasiswa.export.excel');
+    Route::get('/mahasiswa/{id}/edit', [MhsController::class, 'edit'])->name('mahasiswa.edit');
+    Route::put('/mahasiswa/{id}', [MhsController::class, 'update'])->name('mahasiswa.update');
+    Route::get('mahasiswa/detail/{id}', [MhsController::class, 'show'])->name('mahasiswa.detail');
 
 
 
-        
-    });
+
+});
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <!-- Data master Dropdown -->
+            <!-- Data mahasiswa Dropdown  -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -34,10 +34,12 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <!-- Link to Product Master -->
+                        <!-- Link to  Mahasiswa -->
                         <x-dropdown-link :href="route('mahasiswa.index')">
                             Mahasiswa
                         </x-dropdown-link>
+
+                        
 
                     </x-slot>
                 </x-dropdown>

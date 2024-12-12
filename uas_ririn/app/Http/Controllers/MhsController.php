@@ -17,8 +17,8 @@ class MhsController extends Controller
      */
     public function index()
     {
-        $mahasiswa = Mahasiswa::all();
-        return view('mahasiswa.index', compact('mahasiswa'));
+        $mahasiswas = Mahasiswa::all(); //mengambil semua data dari tabel mahasiswas menggunakan model mahasiswa
+        return view('mahasiswa.index', compact('mahasiswas')); //mengirim data ke view
     }
 
     /**
@@ -39,16 +39,16 @@ class MhsController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validated = $request->validate([ //ini buat validasi data 
             'nama' => 'required|string|max:255',
             'npm' => 'required|string|max:15',
             'prodi' => 'required|string|max:100',
         ]);
 
         // Simpan data ke database
-        Mahasiswa::create($validated);
+        Mahasiswa::create($validated); 
 
-        return redirect()->route('mahasiswa.create')->with('success', 'Data mahasiswa berhasil disimpan!');
+        return redirect()->route('mahasiswa.create')->with('success', 'Data mahasiswa berhasil disimpan!'); 
     }
 
     /**
@@ -56,7 +56,8 @@ class MhsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $mahasiswa = Mahasiswa::find($id);
+        return view('mahasiswa.detail', compact('mahasiswa'));
     }
 
     /**
@@ -64,17 +65,29 @@ class MhsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        return view('mahasiswa.edit', compact('mahasiswa'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        $request->validate([
+            'npm' => 'required|string|max:15',
+            'nama' => 'required|string|max:255',
+            'prodi' => 'required|string|max:255',
+        ]);
 
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa->npm = $request->input('npm');
+        $mahasiswa->nama = $request->input('nama');
+        $mahasiswa->prodi = $request->input('prodi');
+        $mahasiswa->save();
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diperbarui.');
+    }
     /**
      * Remove the specified resource from storage.
      */
@@ -90,7 +103,8 @@ class MhsController extends Controller
         return redirect()->back()->with('success', 'Mahasiswa berhasil dihapus!');
     }
 
-    public function exportExcel(){
+    public function exportExcel()
+    {
         return Excel::download(new MahasiswaExport, 'Mhs.xlsx');
     }
 

@@ -7,14 +7,23 @@
 
     <div class="container p-4 mx-auto">
         <div class="overflow-x-auto">
-    
-            <a href="{{ route('mahasiswa.export.excel') }}">
-                        <button
-                            class="px-6 py-4 text-white bg-green-500 border border-green-500 rounded-lg shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
-                            Export to Excel
-                        </button>
-                    </a>
-            <table class="min-w-full border border-collapse border-gray-200 mt-4">
+
+            <!-- Button Tambah Data Mahasiswa (commented out) -->
+            <a href="{{ route('mahasiswa.create') }}">
+                <button class="px-6 py-4 text-white bg-green-500 border border-green-500 rounded-lg shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    Tambah Data Mahasiswa
+                </button>
+            </a> 
+
+            <!-- Button Export to Excel -->
+            <a href="{{ route('mahasiswa.export.excel') }}" class="mb-4 inline-block">
+                <button class="px-6 py-4 text-white bg-green-500 border border-green-500 rounded-lg shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+                    Export to Excel
+                </button>
+            </a>
+
+            <!-- Tabel Data Mahasiswa -->
+            <table class="min-w-full border-collapse border border-gray-200 mt-4">
                 <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2 text-left text-gray-600 border border-gray-200">ID</th>
@@ -25,16 +34,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($mahasiswa as $mahasiswa)
+                    @foreach ($mahasiswas as $mahasiswa)
                         <tr class="bg-white">
                             <td class="px-4 py-2 border border-gray-200">{{ $mahasiswa->id }}</td>
                             <td class="px-4 py-2 border border-gray-200">{{ $mahasiswa->nama }}</td>
                             <td class="px-4 py-2 border border-gray-200">{{ $mahasiswa->npm }}</td>
                             <td class="px-4 py-2 border border-gray-200">{{ $mahasiswa->prodi }}</td>
                             <td class="px-4 py-2 border border-gray-200">
-    
-                                <button class="px-2 text-red-600 hover:text-red-800"
-                                    onclick="confirmDelete({{ $mahasiswa->id }}, '{{ route('mahasiswa.destroy', $mahasiswa->id) }}')">Hapus</button>
+                                <!-- <a href="{{ route('mahasiswa.detail', $mahasiswa->id) }}" class="text-blue-500 hover:underline">
+                                    Detail
+                                </a> -->
+                                {{-- <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}" class="px-2 text-blue-600 hover:text-blue-800">Edit</a> --}}
+                                <button class="px-2 text-red-600 hover:text-red-800" onclick="confirmDelete({{ $mahasiswa->id }}, '{{ route('mahasiswa.destroy', $mahasiswa->id) }}')">
+                                    Hapus
+                                </button>
                             </td>
                         </tr>
                     @endforeach
